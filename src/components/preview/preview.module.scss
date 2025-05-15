@@ -1,0 +1,36 @@
+.preview {
+  height: 100vh;
+  padding-top: 100px;
+  background: url("../../assets/preview-bg.jpg") no-repeat;
+  background-size: 100% auto;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  &__inner {
+    width: 55%;
+  }
+  &__subtitle {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 40px 0 80px;
+  }
+  &__title {
+    font-family: var(--font-family-title);
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  &__button {
+    background: var(--text-color);
+    padding: 15px 30px;
+    border-radius: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background: var(--primary-color);
+    }
+  }
+}
