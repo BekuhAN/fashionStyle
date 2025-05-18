@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
-import { Comment } from "../../interfaces/comment";
+import { type Comment } from "../../interfaces/comment";
 
 export const useComments = () => {
   const [comments, setComments] = useState<Array<Comment>>([]);
