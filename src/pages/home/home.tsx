@@ -6,6 +6,7 @@ import Popular from "../../components/popular/popular";
 import Banner from "../../components/banner/banner";
 import New from "../../components/new/new";
 import Comments from "../../components/comments/comments";
+import News from "../../components/news/news";
 
 function Home(): ReactElement {
   return (
@@ -16,6 +17,7 @@ function Home(): ReactElement {
       <Banner />
       <New />
       <Comments />
+      <News />
     </div>
   );
 }
