@@ -6,6 +6,7 @@ import Home from "./pages/home/home";
 import Footer from "./components/footer/footer";
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import About from "./pages/about/about";
+import Contacts from "./pages/contacts/contacts";
 // import About from "./pages/about/about";
 // import Contacts from "./pages/contacts/contacts";
 // import ServicePage from "./pages/service-page/service-page";
@@ -24,9 +25,10 @@ function App(): ReactElement {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/contacts" element={<Contacts />}></Route>
         {/*<Route path="/services/:id" element={<ServicePage />}></Route>
         <Route path="/news/:id" element={<NewsPage />}></Route>
-        <Route path="/contacts" element={<Contacts />}></Route> */}
+         */}
       </Routes>
       <Footer />
     </HeroUIProvider>

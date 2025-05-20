@@ -3,10 +3,12 @@
     padding-top: 100px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-    row-gap: 0;
+
     div:last-child {
       text-align: right;
+      padding-left: 50px;
+      padding-right: 0;
+      align-items: end;
     }
   }
   &__title {
@@ -15,9 +17,50 @@
     display: inline-block;
     border-bottom: 3px solid var(--gray-300);
   }
+  &__image {
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: rgba(#fff, 0.3);
+      z-index: 1;
+      opacity: 0;
+      transition-delay: width 0.5s, height 0.5s;
+      transition: 0.5s;
+    }
+    &:hover {
+      &::before {
+        width: 0;
+        opacity: 1;
+      }
+      &::after {
+        height: 0;
+        opacity: 1;
+      }
+    }
+  }
   &__content {
     font-size: 20px;
     color: var(--gray-400);
+    padding-right: 50px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
     p {
       margin-bottom: 20px;
       line-height: 1.5;

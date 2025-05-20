@@ -4,6 +4,8 @@ import styles from "./about.module.scss";
 import Comments from "../../components/comments/comments";
 import News from "../../components/news/news";
 import clsx from "clsx";
+import About1 from '../../assets/about-1.jpg';
+import About2 from '../../assets/about-2.jpg';
 
 function About(): ReactElement {
   return (
@@ -23,10 +25,10 @@ function About(): ReactElement {
           </p>
         </div>
         <div className={styles.about__image}>
-          <img src="" />
+          <img src={About1} />
         </div>
         <div className={styles.about__image}>
-          <img src="" />
+          <img src={About2} />
         </div>
         <div className={styles.about__content}>
           <h3 className={styles.about__title}>Мэйд ин Раша</h3>
