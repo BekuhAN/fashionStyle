@@ -1,0 +1,21 @@
+.page_title {
+  background: var(--gray);
+  margin-top: 130px;
+  padding: 50px 0;
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 18px;
+    &__link {
+      svg path {
+        transition:  0.3s ease;
+      }
+      &:hover svg path {
+        fill: var(--primary-color);
+      }
+    }
+  }
+}

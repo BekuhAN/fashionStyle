@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
 import { Autoplay } from "swiper/modules";
 import { useNews } from "../../data-access/news/use-news";
-import { Icon } from "@iconify/react";
+import NewsItem from "../news-item/news-item";
 
 function News(): ReactElement {
   const newsList = useNews();
@@ -27,20 +27,7 @@ function News(): ReactElement {
             {newsList.length &&
               newsList.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <div className={styles.news__item}>
-                    <div className={styles.news__item__image}>
-                      <img src={`./assets/${item.image}`} />
-                    </div>
-                    <div className={styles.news__item__date}>
-                      <Icon
-                        icon="material-symbols-light:calendar-month-sharp"
-                        width="18"
-                        height="18"
-                      />
-                      {item.date}
-                    </div>
-                    <div className={styles.news__item__title}>{item.title}</div>
-                  </div>
+                  <NewsItem item={item} />
                 </SwiperSlide>
               ))}
           </Swiper>

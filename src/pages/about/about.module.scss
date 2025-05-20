@@ -1,0 +1,26 @@
+.about {
+  &__inner {
+    padding-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    row-gap: 0;
+    div:last-child {
+      text-align: right;
+    }
+  }
+  &__title {
+    font-size: 30px;
+    margin-bottom: 30px;
+    display: inline-block;
+    border-bottom: 3px solid var(--gray-300);
+  }
+  &__content {
+    font-size: 20px;
+    color: var(--gray-400);
+    p {
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+  }
+}
