@@ -1,10 +1,42 @@
-import { type ReactElement } from "react";
+import { useRef, type FormEvent, type ReactElement } from "react";
 import styles from "./contacts.module.scss";
 import PageTitle from "../../components/page-title/page-title";
 import clsx from "clsx";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import emailjs from "@emailjs/browser";
+import { addToast } from "@heroui/react";
 
 function Contacts(): ReactElement {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const sendEmail = (e: FormEvent) => {
+    e.preventDefault();
+    // gutgesg3pd@translateid.com
+    emailjs
+      .sendForm("service_wulgaob", "template_mw3ksfi", formRef.current || "", {
+        publicKey: "uQUIWvCwv0Nvd-XaD",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          formRef.current?.reset();
+          addToast({
+            title: "Успех!",
+            description: "Сообщение успешно отправлено!",
+            timeout: 3000,
+            color: "success",
+          });
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          addToast({
+            title: "Ошибка...",
+            description: error.text,
+            timeout: 3000,
+            color: "danger",
+          });
+        }
+      );
+  };
   return (
     <main className={styles.contacts}>
       <PageTitle title="Контакты" />
@@ -19,19 +51,31 @@ function Contacts(): ReactElement {
         </div>
         <div className={styles.contacts__form}>
           <h3 className={styles.contacts__title}>Оставьте нам сообщение</h3>
-          <form action="">
+          <form
+            className={styles.contacts__form__inner}
+            action=""
+            ref={formRef}
+            onSubmit={sendEmail}
+          >
             <label htmlFor="" className={styles.contacts__form__item}>
-              <input type="text" />
+              Ваше имя *
+              <input required type="text" name="contacts_name" />
             </label>
             <label htmlFor="" className={styles.contacts__form__item}>
-              <input type="text" />
+              Ваша почта *
+              <input required type="email" name="contacts_email" />
             </label>
             <label htmlFor="" className={styles.contacts__form__item}>
-              <input type="text" />
+              Тема сообщения
+              <input type="text" name="contacts_theme" />
             </label>
             <label htmlFor="" className={styles.contacts__form__item}>
-              <textarea name="" id=""></textarea>
+              Сообщения *
+              <textarea required name="contacts_message" id=""></textarea>
             </label>
+            <button className={styles.contacts__form__btn} type="submit">
+              Отправить
+            </button>
           </form>
         </div>
         <div className={styles.contacts__info}>

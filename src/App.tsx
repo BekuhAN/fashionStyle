@@ -20,7 +20,7 @@ function App(): ReactElement {
 
   return (
     <HeroUIProvider>
-      <ToastProvider />
+      <ToastProvider placement="bottom-left" />
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>

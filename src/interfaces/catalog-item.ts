@@ -11,5 +11,6 @@ export interface CatalogItem extends BaseModel<string>  {
     new: boolean;
     popular: boolean;
     measurements: string;
-    care: string
+    care: string,
+    count?: number
   }

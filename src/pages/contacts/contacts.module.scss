@@ -10,6 +10,39 @@
   }
   &__form {
     padding: 30px 0;
+    &__btn {
+      background: var(--text-color);
+      padding: 15px 30px;
+      color: #fff;
+      text-transform: uppercase;
+      transition: 0.3s ease;
+      &:hover {
+        background: var(--primary-color);
+      }
+    }
+    &__inner {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      input {
+        border: 1px solid var(--gray-400);
+        height: 50px;
+        padding-left: 20px;
+      }
+      textarea {
+        border: 1px solid var(--gray-400);
+        height: 200px;
+        padding-left: 20px;
+        padding-top: 10px;
+        resize: none;
+      }
+    }
   }
   &__title {
     font-size: 24px;
@@ -19,6 +52,10 @@
   &__info {
     background: var(--gray);
     padding: 30px;
+    height: max-content;
+    &__text {
+      margin-top: 20px;
+    }
     &__item {
       padding: 30px 0;
       &:not(:last-child) {

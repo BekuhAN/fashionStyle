@@ -3,7 +3,7 @@ import styles from "./header.module.scss";
 import clsx from "clsx";
 import { useNavigation } from "../../data-access/navigation/use-navigation";
 import { Link } from "react-router-dom";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import Cart from "../cart/cart";
 
 function Header(): ReactElement {
   const navList = useNavigation();
@@ -27,9 +27,7 @@ function Header(): ReactElement {
           </ul>
         </nav>
         <div className={styles.header__cart}>
-          <Icon
-            icon="material-symbols-light:shopping-bag-outline-sharp"
-          />
+          <Cart />
         </div>
       </div>
     </header>
