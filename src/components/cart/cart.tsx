@@ -13,7 +13,6 @@ import {
   Form,
   Input,
   Textarea,
-  Tooltip,
   useDisclosure,
 } from "@heroui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -124,18 +123,11 @@ export default function Cart(): ReactElement {
     <>
       <div className={styles.cart__icon} onClick={onOpen}>
         <Badge placement="top-right" content={list.length}>
-          <Tooltip
-            radius="none"
-            content="Корзина"
-            showArrow={true}
-            placement="bottom"
-          >
-            <Icon
-              icon="material-symbols-light:shopping-bag-sharp"
-              width="35"
-              height="35"
-            />
-          </Tooltip>
+          <Icon
+            icon="material-symbols-light:shopping-bag-sharp"
+            width="35"
+            height="35"
+          />
         </Badge>
       </div>
       <Drawer
