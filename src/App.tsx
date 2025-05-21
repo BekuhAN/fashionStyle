@@ -9,10 +9,6 @@ import About from "./pages/about/about";
 import Contacts from "./pages/contacts/contacts";
 import Catalog from "./pages/catalog/catalog";
 import CatalogPage from "./pages/catalog-page/catalog-page";
-// import About from "./pages/about/about";
-// import Contacts from "./pages/contacts/contacts";
-// import ServicePage from "./pages/service-page/service-page";
-// import NewsPage from "./pages/news-page/news-page";
 
 function App(): ReactElement {
   const { pathname } = useLocation();
