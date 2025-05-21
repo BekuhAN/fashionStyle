@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../api";
-import { type CatalogItem } from "../../interfaces/catalog-item";
+import { type CatalogItemType } from "../../interfaces/catalog-item";
 
 interface Params {
   new?: boolean;
@@ -15,11 +15,11 @@ interface Params {
 }
 
 export const useCatalog = (params: Params) => {
-  const [items, setItems] = useState<Array<CatalogItem>>([]);
+  const [items, setItems] = useState<Array<CatalogItemType>>([]);
   const memoizedParams = useMemo(() => params, [JSON.stringify(params)]);
   useEffect(() => {
     const get = async () => {
-      const items = await api<CatalogItem>({
+      const items = await api<CatalogItemType>({
         path: "catalog",
         params: memoizedParams,
       });

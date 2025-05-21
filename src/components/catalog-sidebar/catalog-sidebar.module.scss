@@ -1,0 +1,48 @@
+.sidebar {
+  &__title {
+    font-weight: 500;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--gray-400);
+    position: relative;
+    font-size: 24px;
+    padding-bottom: 20px;
+  }
+  &__price {
+    margin-bottom: 50px;
+    &__filter {
+      background: var(--primary-color);
+    }
+    &__thumb {
+      background: var(--primary-color);
+    }
+  }
+  &__list {
+    margin-bottom: 30px;
+    &__item {
+      padding: 5px 0;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      &::before {
+        content: "›";
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        left: -20px;
+        line-height: 1;
+        transition: all 0.3s ease;
+        transform: translateY(-50%);
+        font-weight: bold;
+      }
+      &:hover {
+        padding-left: 20px;
+        &::before {
+          left: 0;
+        }
+      }
+    }
+  }
+}

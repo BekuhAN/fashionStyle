@@ -7,6 +7,8 @@ import Footer from "./components/footer/footer";
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import About from "./pages/about/about";
 import Contacts from "./pages/contacts/contacts";
+import Catalog from "./pages/catalog/catalog";
+import CatalogPage from "./pages/catalog-page/catalog-page";
 // import About from "./pages/about/about";
 // import Contacts from "./pages/contacts/contacts";
 // import ServicePage from "./pages/service-page/service-page";
@@ -26,9 +28,8 @@ function App(): ReactElement {
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contacts" element={<Contacts />}></Route>
-        {/*<Route path="/services/:id" element={<ServicePage />}></Route>
-        <Route path="/news/:id" element={<NewsPage />}></Route>
-         */}
+        <Route path="/catalog" element={<Catalog />}></Route>
+        <Route path="/catalog/:id" element={<CatalogPage />}></Route>
       </Routes>
       <Footer />
     </HeroUIProvider>

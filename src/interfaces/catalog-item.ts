@@ -1,6 +1,6 @@
 import { type BaseModel } from "./base-model";
 
-export interface CatalogItem extends BaseModel<string>  {
+export interface CatalogItemType extends BaseModel<string>  {
     title: string;
     info: string;
     image: string[];
