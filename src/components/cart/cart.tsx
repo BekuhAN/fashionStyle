@@ -2,7 +2,7 @@ import { type FormEvent, type ReactElement, useRef, useState } from "react";
 
 import styles from "./cart.module.scss";
 import {
-  Alert,
+  addToast,
   Badge,
   Button,
   Drawer,
@@ -12,13 +12,26 @@ import {
   DrawerHeader,
   Form,
   Input,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
   Textarea,
   useDisclosure,
 } from "@heroui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, getCart, getTotal } from "../../features/cart/cart";
+import {
+  clearCart,
+  getCart,
+  getTotal,
+  removeCart,
+} from "../../features/cart/cart";
 import emailjs from "@emailjs/browser";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import CartItem from "../cart-item/cart-item";
+import { Link } from "react-router-dom";
 
 const priceFormat = (price: number) =>
   price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
@@ -29,14 +42,7 @@ export default function Cart(): ReactElement {
   const list = useSelector(getCart);
   const total = useSelector(getTotal);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState({
-    isError: false,
-    text: "",
-  });
-  const [warning, setWarning] = useState(false);
 
-  const [loading, setLoading] = useState(false);
   const [sendTemplate, setSendTemplate] = useState("");
 
   const TemplateTable = () => {
@@ -70,55 +76,44 @@ export default function Cart(): ReactElement {
             .join("")}
         </tbody>
       </table>
-      <h2 class='cart_total'>Итого: ${total} руб.</h2>
+      <h2 class='cart_total'>Итого: ${priceFormat(total)} руб.</h2>
     `
     );
   };
 
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //hqvlamo357@ramvv.com
-    setLoading(true);
-    if (list.length > 0) {
-      emailjs
-        .sendForm(
-          "service_099qjgo",
-          "template_306q5sv",
-          formRef.current || "",
-          {
-            publicKey: "S1l_xUmzgej3DKyLo",
+    //gutgesg3pd@translateid.com
+    emailjs
+      .sendForm("service_wulgaob", "template_7r2dixx", formRef.current || "", {
+        publicKey: "uQUIWvCwv0Nvd-XaD",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          if (formRef.current) {
+            formRef.current.reset();
           }
-        )
-        .then(
-          () => {
-            console.log("SUCCESS!");
-            setLoading(false);
-            setSuccess(true);
-            setTimeout(() => {
-              setSuccess(false);
-            }, 2000);
-            if (formRef.current) {
-              formRef.current.reset();
-            }
-            dispatch(clearCart());
-          },
-          (error) => {
-            console.log("FAILED...", error.text);
-            setLoading(false);
-            setError({ isError: true, text: error.text });
-            setTimeout(() => {
-              setError({ isError: false, text: error.text });
-            }, 2000);
-          }
-        );
-    } else {
-      setWarning(true);
-      setTimeout(() => {
-        setWarning(false);
-        setLoading(false);
-      }, 2000);
-    }
+          addToast({
+            title: "Успех!",
+            description: "Сообщение успешно отправлено!",
+            timeout: 3000,
+            color: "success",
+          });
+          dispatch(clearCart());
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          addToast({
+            title: "Ошибка...",
+            description: error.text,
+            timeout: 3000,
+            color: "danger",
+          });
+        }
+      );
   };
+
   return (
     <>
       <div className={styles.cart__icon} onClick={onOpen}>
@@ -145,15 +140,65 @@ export default function Cart(): ReactElement {
               <DrawerBody>
                 {list.length > 0 ? (
                   <div className={styles.cart__list}>
-                    {list.map(
-                      (item) => item.id
-                      //   <Product
-                      //     key={item.id}
-                      //     item={item}
-                      //     isRow={true}
-                      //     isCart={true}
-                      //   />
-                    )}
+                    <Table
+                      radius="none"
+                      aria-label="Example static collection table"
+                    >
+                      <TableHeader>
+                        <TableColumn width={100}>Изображение</TableColumn>
+                        <TableColumn>Название</TableColumn>
+                        <TableColumn width={90}>Цена</TableColumn>
+                        <TableColumn width={120}>Кол-во</TableColumn>
+                        <TableColumn width={90}>Сумма</TableColumn>
+                        <TableColumn width={50}>Удалить</TableColumn>
+                      </TableHeader>
+                      <TableBody>
+                        {list?.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell>
+                              <div className={styles.cart_item__image}>
+                                <img
+                                  src={`../../assets/catalog/${item.image[0]}`}
+                                />
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/catalog/${item.id}`}
+                                className={styles.cart_item__title}
+                              >
+                                {item.title}
+                              </Link>
+                            </TableCell>
+                            <TableCell>
+                              <div className={styles.cart_item__price}>
+                                {priceFormat(item.price)} ₽
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <CartItem item={item} />
+                            </TableCell>
+                            <TableCell>
+                              <div className={styles.cart_item__price}>
+                                {priceFormat(item.price * item?.count)} ₽
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <button
+                                className={styles.cart_item__delete}
+                                onClick={() => dispatch(removeCart(item))}
+                              >
+                                <Icon
+                                  icon="material-symbols-light:delete-outline-sharp"
+                                  width="30"
+                                  height="30"
+                                />
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
                   </div>
                 ) : (
                   <div>Пусто :(</div>
@@ -203,6 +248,7 @@ export default function Cart(): ReactElement {
                     className="hidden"
                     name="order_list"
                     value={sendTemplate}
+                    readOnly
                   ></textarea>
                   <div className={styles.cart__footer}>
                     <div className={styles.cart__total}>
@@ -211,7 +257,6 @@ export default function Cart(): ReactElement {
                     </div>
                     <div className={styles.cart__controls}>
                       <Button
-                        isLoading={loading}
                         type="submit"
                         color="primary"
                         onPress={() => {
@@ -239,21 +284,6 @@ export default function Cart(): ReactElement {
                       </Button>
                     </div>
                   </div>
-                  {success && (
-                    <Alert color="success" title="Заказ успешно отправлен!" />
-                  )}
-                  {error.isError && (
-                    <Alert
-                      color="danger"
-                      title={`Что-то пошло не так... Ошибка { ${error.text} }`}
-                    />
-                  )}
-                  {warning && (
-                    <Alert
-                      color="warning"
-                      title={`Корзина пуста, добавьте товары!`}
-                    />
-                  )}
                 </Form>
               </DrawerFooter>
             </>

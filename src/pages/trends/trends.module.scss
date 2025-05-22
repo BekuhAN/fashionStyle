@@ -1,0 +1,25 @@
+.trends {
+  &__item {
+    margin-bottom: 100px;
+    &__image {
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+    &__title {
+      font-size: 72px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 30px;
+      font-family: var(--font-family-title);
+    }
+    &__text {
+      color: #fff;
+      width: 30%;
+      text-align: center;
+    }
+  }
+}

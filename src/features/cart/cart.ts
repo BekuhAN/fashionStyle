@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type CatalogItem  } from '../../interfaces/catalog-item'
+import { type CatalogItemType  } from '../../interfaces/catalog-item'
+import { remove } from 'lodash'
 
 export interface CartState {
-  list: Array<CatalogItem>,
+  list: Array<CatalogItemType>,
   total: number
 }
 
@@ -16,14 +17,14 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    setCart: (state, action: PayloadAction<Array<CatalogItem >>) => {
+    setCart: (state, action: PayloadAction<Array<CatalogItemType >>) => {
       state.list = action.payload
     },
-    addCart: (state, action: PayloadAction<CatalogItem >) => {
+    addCart: (state, action: PayloadAction<CatalogItemType >) => {
       state.list.push(action.payload)
       state.total += action.payload.price * (action.payload?.count ?? 1)
     },
-    editCart: (state, action: PayloadAction<CatalogItem>) => {
+    editCart: (state, action: PayloadAction<CatalogItemType>) => {
     state.list = state.list.map(item => {
       if (item.id === action.payload.id) {
         return {...item, count: action.payload.count}
@@ -31,8 +32,9 @@ export const cartSlice = createSlice({
     })
     state.total = state.list.reduce((acc, item) => acc + item.price * (item?.count ?? 0), 0)
     },
-    removeCart: (state, action: PayloadAction<CatalogItem>) => {
-      state.list = state.list.filter((item) => item.id !== action.payload.id)
+    removeCart: (state, action: PayloadAction<CatalogItemType>) => {
+      // state.list = state.list.filter((item) => item.id !== action.payload.id)
+      state.list = remove(state.list, (item) => item.id !== action.payload.id)
       state.total -= action.payload.price * (action.payload?.count ?? 1)
     },
     clearCart: (state) => {

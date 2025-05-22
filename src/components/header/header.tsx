@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useNavigation } from "../../data-access/navigation/use-navigation";
 import { Link } from "react-router-dom";
 import Cart from "../cart/cart";
+import Wishlist from "../wishlist/wishlist";
 
 function Header(): ReactElement {
   const navList = useNavigation();
@@ -27,6 +28,7 @@ function Header(): ReactElement {
           </ul>
         </nav>
         <div className={styles.header__cart}>
+          <Wishlist />
           <Cart />
         </div>
       </div>

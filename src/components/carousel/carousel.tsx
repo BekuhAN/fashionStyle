@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import type { CatalogItem } from "../../interfaces/catalog-item";
+import type { CatalogItemType } from "../../interfaces/catalog-item";
 import styles from "./carousel.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 interface Props {
   title: string;
-  items: CatalogItem[];
+  items: CatalogItemType[];
 }
 
 const priceFormat = (price: number) =>
@@ -40,12 +40,12 @@ function Carousel({ title, items }: Props): ReactElement {
                 >
                   <figure className={styles.carousel__item__img}>
                     <img
-                      src={`./assets/catalog/${item.image[0]}`}
+                      src={`../../assets/catalog/${item.image[0]}`}
                       alt={item.title}
                       className={styles.main}
                     />
                     <img
-                      src={`./assets/catalog/${item.image[1]}`}
+                      src={`../../assets/catalog/${item.image[1]}`}
                       alt={item.title}
                     />
                   </figure>

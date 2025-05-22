@@ -1,0 +1,30 @@
+.cart_item {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  align-items: center;
+  gap: 10px;
+  &__image {
+    height: 100px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__title {
+    font-weight: 500;
+    transition: 0.3s;
+    font-size: 18px;
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+  &__delete {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+}

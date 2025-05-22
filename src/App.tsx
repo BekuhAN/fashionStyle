@@ -9,6 +9,7 @@ import About from "./pages/about/about";
 import Contacts from "./pages/contacts/contacts";
 import Catalog from "./pages/catalog/catalog";
 import CatalogPage from "./pages/catalog-page/catalog-page";
+import Trends from "./pages/trends/trends";
 
 function App(): ReactElement {
   const { pathname } = useLocation();
@@ -26,6 +27,7 @@ function App(): ReactElement {
         <Route path="/contacts" element={<Contacts />}></Route>
         <Route path="/catalog" element={<Catalog />}></Route>
         <Route path="/catalog/:id" element={<CatalogPage />}></Route>
+        <Route path="/trends" element={<Trends />}></Route>
       </Routes>
       <Footer />
     </HeroUIProvider>
