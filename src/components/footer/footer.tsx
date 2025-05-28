@@ -27,6 +27,20 @@ function Footer(): ReactElement {
                 одежде.
               </p>
             </div>
+            <div className={styles.footer__social}>
+              <a
+                href="https://telegram.org/"
+                className={styles.footer__social__item}
+              >
+                <Icon icon="cib:telegram" />
+              </a>
+              <a href="https://vk.com/" className={styles.footer__social__item}>
+                <Icon icon="cib:vk" />
+              </a>
+              <a href="https://ok.ru/" className={styles.footer__social__item}>
+                <Icon icon="cib:odnoklassniki" />
+              </a>
+            </div>
           </div>
           <div className={styles.footer__column}>
             <div className={styles.footer__title}>Навигация</div>
